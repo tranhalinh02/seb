@@ -1,4 +1,55 @@
-# Danh sách kích hoạt thiết bị năm 2026
+# SE kì 1
+QX9T10-KL7P887-MN2VU   | A3EF1AA        # tranhalinh
+Z8WAT2-RY3NR7-XT6QY9   | 99F200A1       # long
+B3M7X2-WP9K4A-QT8V1    | EMPTY          # Key 01
+N5Q9R1-TL6M4B-XZ7W2    | EMPTY          # Key 02
+K8V4P9-ZN3W7C-RT6Y1    | EMPTY          # Key 03
+X2W7M9-RL4K6A-PT5V8    | EMPTY          # Key 04
+D9B3Q7-WL6N2C-XT8Z4    | EMPTY          # Key 05
+P4K8V1-ZN7W3B-RT5Y9    | EMPTY          # Key 06
+M6T2X9-RL4K7A-WT8Q3    | EMPTY          # Key 07
+Z3W7P9-NL5M2B-XT4V1    | EMPTY          # Key 08
+R8K4V9-ZN2W6C-PT7Y3    | EMPTY          # Key 09
+B5M9X1-TL4K7A-WT3Q8    | EMPTY          # Key 10
+N7Q3R9-WL5M2B-XZ6W1    | EMPTY          # Key 11
+K4V8P1-ZN6W3C-RT7Y2    | EMPTY          # Key 12
+X9W2M7-RL5K3A-PT8V4    | EMPTY          # Key 13
+D5B9Q1-WL4N7C-XT3Z8    | EMPTY          # Key 14
+P2K6V9-ZN3W5B-RT8Y1    | EMPTY          # Key 15
+M4T8X1-RL6K2A-WT7Q9    | EMPTY          # Key 16
+Z5W9P1-NL4M7B-XT3V8    | EMPTY          # Key 17
+R2K6V1-ZN3W8C-PT5Y9    | EMPTY          # Key 18
+B4M8X9-TL5K2A-WT7Q1    | EMPTY          # Key 19
+N2Q6R1-WL3M8B-XZ5W9    | EMPTY          # Key 20
 
-MODLITE-X921-KEY   | A3EF1AA        # test
-STATION-MONITOR    | 99F200A1       # máy của long
+# SE kì 2 
+K9V3P7-ZN4W2C-RT8Y5    | EMPTY          # Key 21
+X4W8M1-RL6K3A-PT7V9    | EMPTY          # Key 22
+D2B6Q9-WL3N8C-XT5Z1    | EMPTY          # Key 23
+P9K3V7-ZN4W1B-RT8Y2    | EMPTY          # Key 24
+M5T9X1-RL3K8A-WT4Q2    | EMPTY          # Key 25
+Z2W6P9-NL3M7B-XT5V1    | EMPTY          # Key 26
+R9K3V2-ZN4W8C-PT7Y1    | EMPTY          # Key 27
+B6M2X7-TL4K9A-WT5Q1    | EMPTY          # Key 28
+N9Q3R2-WL4M7B-XZ5W1    | EMPTY          # Key 29
+K6V2P7-ZN3W9C-RT4Y1    | EMPTY          # Key 30
+X3W7M1-RL4K8A-PT5V2    | EMPTY          # Key 31
+D9B2Q6-WL3N7C-XT4Z1    | EMPTY          # Key 32
+P8K2V6-ZN3W7B-RT4Y1    | EMPTY          # Key 33
+M3T7X9-RL4K2A-WT5Q1    | EMPTY          # Key 34
+Z9W3P2-NL4M6B-XT5V1    | EMPTY          # Key 35
+R7K2V5-ZN3W6C-PT4Y1    | EMPTY          # Key 36
+B9M3X2-TL4K6A-WT5Q1    | EMPTY          # Key 37
+N8Q2R5-WL3M6B-XZ4W1    | EMPTY          # Key 38
+K3V7P1-ZN4W6C-RT5Y2    | EMPTY          # Key 39
+X8W2M6-RL3K7A-PT4V1    | EMPTY          # Key 40
+D7B1Q5-WL2N6C-XT3Z9    | EMPTY          # Key 41
+P3K7V1-ZN4W5B-RT2Y9    | EMPTY          # Key 42
+M9T3X2-RL4K5A-WT1Q8    | EMPTY          # Key 43
+Z7W1P5-NL2M6B-XT3V9    | EMPTY          # Key 44
+R3K7V9-ZN4W2C-PT1Y8    | EMPTY          # Key 45
+B2M6X1-TL3K5A-WT8Q9    | EMPTY          # Key 46
+N3Q7R9-WL4M2B-XZ1W8    | EMPTY          # Key 47
+K2V6P1-ZN3W5C-RT8Y9    | EMPTY          # Key 48
+X7W1M5-RL2K4A-PT3V9    | EMPTY          # Key 49
+D3B7Q9-WL4N2C-XT1Z8    | EMPTY          # Key 50
