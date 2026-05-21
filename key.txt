@@ -1,4 +1,4 @@
 # Danh sách kích hoạt thiết bị năm 2026
 
-MODLITE-X921-KEY   |        # test
+MODLITE-X921-KEY   | A3EF1AA        # test
 STATION-MONITOR    | 99F200A1       # máy của long
