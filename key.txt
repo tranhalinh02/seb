@@ -1,5 +1,4 @@
 # Danh sách kích hoạt thiết bị năm 2026
 
-VIP-USER-8888-ABC | EMPTY          # Key này vừa tạo, chưa ai dùng
-MODLITE-X921-KEY   | A3EF1AA       # Key này đã khóa chặt vào máy của vị khách longt3
-STATION-MONITOR    | 99F200A1       # Key này đã khóa vào máy của huyquahoa
+MODLITE-X921-KEY   | A3EF1AA       # test
+STATION-MONITOR    | 99F200A1       # máy của long
