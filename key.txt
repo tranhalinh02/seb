@@ -1,6 +1,6 @@
 # SE kì 1
 QX9T10-KL7P887-MN2VU   | A3EF1AA        # tranhalinh
-Z8WAT2-RY3NR7-XT6QY9   | 99F200A1       # long
+Z8WAT2-RY3NR7-XT6QY9   | C83EC4B3       # long
 B3M7X2-WP9K4A-QT8V1    | EMPTY          # Key 01
 N5Q9R1-TL6M4B-XZ7W2    | EMPTY          # Key 02
 K8V4P9-ZN3W7C-RT6Y1    | EMPTY          # Key 03
