@@ -1,4 +1,4 @@
-# Key log cho khách  
+# Key seb thuong log cho khách  
 # Sửa dòng EMPTY là HWID của khách chờ 5p sau khi update trên github thì key sẽ hoạt động
 # SE kì 1
 QX9T10-KL7P887-MN2VU   | A3EF1AA        # hongmy
