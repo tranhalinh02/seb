@@ -1,12 +1,11 @@
 # Key seb thuong log cho khách  
 # Sửa dòng EMPTY là HWID của khách chờ 5p sau khi update trên github thì key sẽ hoạt động
-# SE kì 1
 QX9T10-KL7P887-MN2VU   | A3EF1AA        # hongmy
 Z8WAT2-RY3NR7-XT6QY9   | C83EC4B3       # tranhalinh
 B3M7X2-WP9K4A-QT8V1    | 8E09771D       # quoc
 N5Q9R1-TL6M4B-XZ7W2    | B2E75B14       # baoho
 K8V4P9-ZN3W7C-RT6Y1    | 14BDC486       # minhngoc
-X2W7M9-RL4K6A-PT5V8    | EABBBD8B       # 6/3
+X2W7M9-RL4K6A-PT5V8    | EABBBD8B       # khoi
 D9B3Q7-WL6N2C-XT8Z4    | EMPTY          # Key 05
 P4K8V1-ZN7W3B-RT5Y9    | EMPTY          # Key 06
 M6T2X9-RL4K7A-WT8Q3    | EMPTY          # Key 07
@@ -24,7 +23,6 @@ R2K6V1-ZN3W8C-PT5Y9    | EMPTY          # Key 18
 B4M8X9-TL5K2A-WT7Q1    | EMPTY          # Key 19
 N2Q6R1-WL3M8B-XZ5W9    | EMPTY          # Key 20
 
-# SE kì 2 
 K9V3P7-ZN4W2C-RT8Y5    | EMPTY          # Key 21
 X4W8M1-RL6K3A-PT7V9    | EMPTY          # Key 22
 D2B6Q9-WL3N8C-XT5Z1    | EMPTY          # Key 23
