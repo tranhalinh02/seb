@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kiểm tra cá nhân - SEB Clone</title>
+    <style>
+        /* CSS Reset & Basic Setup */
+        * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; }
+        body { background-color: #333; display: flex; justify-content: center; align-items: center; height: 100vh; overflow: hidden; }
+
+        /* Fake OS / SEB Window */
+        .seb-window { width: 100vw; height: 100vh; background-color: #f3f4f6; display: flex; flex-direction: column; position: relative; }
+        
+        /* Fake Browser Toolbar */
+        .browser-toolbar { background-color: #fff; border-bottom: 1px solid #ddd; padding: 5px 15px; display: flex; align-items: center; gap: 15px; font-size: 14px; }
+        .toolbar-icons { display: flex; gap: 15px; color: #555; font-weight: bold; font-size: 18px; }
+        .toolbar-icons span { cursor: pointer; }
+        
+        /* App Header */
+        .app-header { background-color: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; }
+        .logo-area { display: flex; align-items: center; gap: 10px; font-weight: bold; color: #e46c0a; font-size: 18px; }
+        .user-info { display: flex; align-items: center; gap: 15px; font-size: 12px; color: #555; }
+        .avatar { width: 30px; height: 30px; background-color: #ddd; border-radius: 50%; display: inline-block; }
+
+        /* Sub Header (Exam Info) */
+        .sub-header { background-color: #fff; padding: 10px 20px; display: flex; justify-content: space-between; align-items: center; border-bottom: 2px solid #e5e7eb; box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+        .exam-title { font-size: 15px; color: #555; font-weight: 500; }
+        .font-controls { display: flex; gap: 10px; font-size: 12px; align-items: center; }
+        .font-controls select { padding: 3px; border: 1px solid #ccc; border-radius: 3px; }
+
+        /* Main Content Layout */
+        .main-container { display: flex; gap: 20px; padding: 20px; flex: 1; overflow-y: auto; }
+        
+        /* Left Sidebar */
+        .sidebar { width: 280px; flex-shrink: 0; display: flex; flex-direction: column; gap: 15px; }
+        .card { background-color: #fff; border-radius: 8px; padding: 20px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; }
+        
+        .progress-bar { height: 8px; background-color: #e5e7eb; border-radius: 4px; margin-bottom: 15px; overflow: hidden; }
+        .progress-fill { height: 100%; background-color: #4b4b9b; width: 20%; }
+        
+        .timer-title { font-size: 12px; color: #555; }
+        .timer-value { font-size: 18px; font-weight: bold; color: #2a2a72; margin-bottom: 15px; }
+
+        /* Question Grid */
+        .question-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 20px; }
+        .q-btn { padding: 8px 0; text-align: center; border: 1px solid #ddd; border-radius: 4px; background: #fafafa; cursor: pointer; font-size: 13px; }
+        .q-btn:hover { background: #eee; }
+        .q-btn.active { background: #e0f2fe; border-color: #7dd3fc; font-weight: bold; }
+        .q-btn.answered { background: #d1fae5; border-color: #6ee7b7; }
+
+        /* Action Buttons */
+        .nav-buttons { display: flex; gap: 8px; margin-bottom: 15px; }
+        .btn { flex: 1; padding: 8px; border: none; border-radius: 4px; color: #fff; cursor: pointer; font-size: 13px; display: flex; justify-content: center; align-items: center; gap: 5px; }
+        .btn-prev, .btn-next { background-color: #4ea381; }
+        .btn-reload { background-color: #2a6fc9; }
+        .btn-prev:hover, .btn-next:hover { background-color: #3d8668; }
+        .btn-reload:hover { background-color: #1e559e; }
+        
+        .action-buttons { display: flex; gap: 8px; margin-bottom: 15px; }
+        .btn-outline { flex: 1; padding: 8px; border: 1px solid #ccc; background: #fff; border-radius: 4px; cursor: pointer; font-size: 13px; }
+        .btn-outline:hover { background: #f9f9f9; }
+
+        .dropdown-note { border: 1px solid #ccc; padding: 10px; border-radius: 4px; font-size: 13px; color: #555; display: flex; justify-content: space-between; cursor: pointer; }
+
+        /* Right Content (Question Area) */
+        .content-area { flex: 1; display: flex; flex-direction: column; }
+        .question-card { background: #fff; border-radius: 8px; padding: 30px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #e5e7eb; min-height: 400px; }
+        
+        .q-header { display: flex; justify-content: space-between; align-items: center; border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px; }
+        .q-type { font-size: 14px; font-weight: bold; color: #2a2a72; }
+        .star-btn { padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; color: #f59e0b; }
+
+        .q-text { font-size: 16px; color: #222; margin-bottom: 25px; line-height: 1.5; }
+        
+        /* Input Styles */
+        .options-list { display: flex; flex-direction: column; gap: 15px; }
+        .option-item { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #333; cursor: pointer; }
+        .option-item input[type="radio"], .option-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+        
+        .text-input { width: 100%; max-width: 400px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
+        .textarea-input { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; resize: vertical; }
+
+        /* Fake Bottom Taskbar */
+        .taskbar { background-color: #222; height: 40px; display: flex; justify-content: flex-end; align-items: center; padding: 0 20px; gap: 15px; color: #fff; font-size: 12px; }
+        .taskbar-icon { display: flex; align-items: center; gap: 5px; }
+        .power-btn { font-size: 18px; cursor: pointer; }
+
+    </style>
+</head>
+<body>
+
+<div class="seb-window">
+    <!-- Top fake toolbar -->
+    <div class="browser-toolbar">
+        <div class="toolbar-icons">
+            <span>|◁</span>
+            <span>&lt;</span>
+            <span>&gt;</span>
+            <span>↻</span>
+        </div>
+        <div style="flex:1;"></div>
+        <div style="color: #22c55e;">📶 10ms HD</div>
+        <div style="margin-left: 20px; color: #555;">X &nbsp; +</div>
+    </div>
+
+    <!-- App Header -->
+    <div class="app-header">
+        <div class="logo-area">
+            🌸 FPT Education<br><span style="font-size: 10px; color: #555;">TỔ CHỨC GIÁO DỤC FPT</span>
+        </div>
+        <div class="user-info">
+            <span>[2] 13:22:38 06/11/2026</span>
+            <span>⚙️ 🏠</span>
+            <div class="avatar"></div>
+            <span>ngnnnguyen512@gmail.com (Exam_FU_DN)</span>
+        </div>
+    </div>
+
+    <!-- Sub Header -->
+    <div class="sub-header">
+        <div class="exam-title">Kiểm tra cá nhân - [ClassCode: IB21B01]-[ECO111]-[quyendh@fpt.edu.vn]-[61]</div>
+        <div class="font-controls">
+            Font: 
+            <select><option>Mặc định</option></select>
+            Size: 
+            <select><option>125%</option></select>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="main-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="card">
+                <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+                <div class="timer-title">Thời gian còn lại</div>
+                <div class="timer-value" id="countdownTimer">20m : 0s</div>
+
+                <div class="question-grid" id="questionGrid">
+                    <!-- Buttons generated via JS -->
+                </div>
+
+                <div class="nav-buttons">
+                    <button class="btn btn-prev" onclick="prevQuestion()">← Trước</button>
+                    <button class="btn btn-reload">↻ Tải lại</button>
+                    <button class="btn btn-next" onclick="nextQuestion()">Tiếp theo →</button>
+                </div>
+
+                <div class="action-buttons">
+                    <button class="btn-outline">📝 Nộp bài</button>
+                    <button class="btn-outline">💾 Lưu bài làm</button>
+                </div>
+
+                <div class="dropdown-note">
+                    Lưu ý khi làm bài <span>∨</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Question Content -->
+        <div class="content-area">
+            <div class="question-card">
+                <div class="q-header">
+                    <div class="q-type" id="qTypeLabel">CÂU HỎI 1 (SINGLECHOICE)</div>
+                    <button class="star-btn">☆</button>
+                </div>
+                
+                <div class="q-text" id="qText">
+                    Loading question...
+                </div>
+
+                <div class="options-list" id="qOptions">
+                    <!-- Options generated via JS -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Taskbar -->
+    <div class="taskbar">
+        <div class="taskbar-icon">🔋</div>
+        <div class="taskbar-icon">📶</div>
+        <div class="taskbar-icon">🔊 ENG</div>
+        <div class="taskbar-icon" style="text-align: right;">1:23 CH<br>11/06/2026</div>
+        <div class="power-btn">⏻</div>
+    </div>
+</div>
+
+<script>
+    // Dữ liệu 5 câu hỏi mô phỏng các loại khác nhau
+    const questions = [
+        {
+            id: 1,
+            type: 'SINGLECHOICE',
+            text: 'If buyers and sellers in a certain market are price takers, then individually',
+            inputType: 'radio',
+            options: [
+                'sellers will find it difficult to sell all they want to sell at the market price.',
+                'buyers will be able to find prices lower than those determined in the market.',
+                'they have some influence on market price but that influence is limited.',
+                'they have no influence on market price.'
+            ],
+            answer: null
+        },
+        {
+            id: 2,
+            type: 'MULTIPLECHOICE',
+            text: 'Trong các ngôn ngữ dưới đây, đâu là ngôn ngữ lập trình web phổ biến? (Chọn nhiều đáp án)',
+            inputType: 'checkbox',
+            options: [
+                'HTML / CSS',
+                'JavaScript',
+                'Photoshop',
+                'PHP'
+            ],
+            answer: []
+        },
+        {
+            id: 3,
+            type: 'FILL IN BLANK',
+            text: 'Điền từ thích hợp vào chỗ trống: Thủ đô của Việt Nam là ________.',
+            inputType: 'text',
+            answer: ''
+        },
+        {
+            id: 4,
+            type: 'TRUE/FALSE',
+            text: 'Trí tuệ nhân tạo (AI) có thể hoàn toàn thay thế vai trò của con người trong mọi công việc sáng tạo nghệ thuật.',
+            inputType: 'radio',
+            options: ['True (Đúng)', 'False (Sai)'],
+            answer: null
+        },
+        {
+            id: 5,
+            type: 'ESSAY',
+            text: 'Viết một đoạn văn ngắn (khoảng 3-5 câu) mô tả cảm nhận của bạn về kỳ thi này.',
+            inputType: 'textarea',
+            answer: ''
+        }
+    ];
+
+    let currentIndex = 0;
+
+    // Các Element DOM
+    const qTypeLabel = document.getElementById('qTypeLabel');
+    const qText = document.getElementById('qText');
+    const qOptions = document.getElementById('qOptions');
+    const questionGrid = document.getElementById('questionGrid');
+    const progressFill = document.getElementById('progressFill');
+
+    // Khởi tạo ứng dụng
+    function initApp() {
+        renderGrid();
+        renderQuestion(currentIndex);
+        startTimer(20 * 60); // Đếm ngược 20 phút
+    }
+
+    // Render danh sách nút bên trái
+    function renderGrid() {
+        questionGrid.innerHTML = '';
+        questions.forEach((q, index) => {
+            const btn = document.createElement('button');
+            btn.className = `q-btn ${index === currentIndex ? 'active' : ''} ${hasAnswer(q) ? 'answered' : ''}`;
+            btn.innerText = q.id;
+            btn.onclick = () => {
+                currentIndex = index;
+                renderQuestion(currentIndex);
+                renderGrid(); // Cập nhật lại màu nút
+            };
+            questionGrid.appendChild(btn);
+        });
+        
+        // Cập nhật thanh tiến độ
+        let answeredCount = questions.filter(q => hasAnswer(q)).length;
+        progressFill.style.width = `${(answeredCount / questions.length) * 100}%`;
+    }
+
+    // Kiểm tra câu hỏi đã có đáp án chưa
+    function hasAnswer(q) {
+        if (q.inputType === 'radio' || q.inputType === 'text' || q.inputType === 'textarea') {
+            return q.answer !== null && q.answer !== '';
+        }
+        if (q.inputType === 'checkbox') {
+            return q.answer.length > 0;
+        }
+        return false;
+    }
+
+    // Lưu đáp án
+    function saveAnswer(value, isChecked = null) {
+        const q = questions[currentIndex];
+        if (q.inputType === 'checkbox') {
+            if (isChecked) {
+                if (!q.answer.includes(value)) q.answer.push(value);
+            } else {
+                q.answer = q.answer.filter(v => v !== value);
+            }
+        } else {
+            q.answer = value;
+        }
+        renderGrid(); // Cập nhật lại màu ô câu hỏi bên trái
+    }
+
+    // Hiển thị câu hỏi hiện tại
+    function renderQuestion(index) {
+        const q = questions[index];
+        qTypeLabel.innerText = `CÂU HỎI ${q.id} (${q.type})`;
+        qText.innerText = q.text;
+        qOptions.innerHTML = '';
+
+        if (q.inputType === 'radio' || q.inputType === 'checkbox') {
+            q.options.forEach((opt, i) => {
+                const label = document.createElement('label');
+                label.className = 'option-item';
+                
+                const input = document.createElement('input');
+                input.type = q.inputType;
+                input.name = `question_${q.id}`;
+                input.value = i;
+                
+                // Phục hồi đáp án đã chọn
+                if (q.inputType === 'radio' && q.answer === i.toString()) input.checked = true;
+                if (q.inputType === 'checkbox' && q.answer.includes(i.toString())) input.checked = true;
+
+                input.onchange = (e) => saveAnswer(e.target.value, e.target.checked);
+
+                label.appendChild(input);
+                label.appendChild(document.createTextNode(opt));
+                qOptions.appendChild(label);
+            });
+        } else if (q.inputType === 'text') {
+            const input = document.createElement('input');
+            input.type = 'text';
+            input.className = 'text-input';
+            input.placeholder = 'Nhập câu trả lời của bạn...';
+            input.value = q.answer || '';
+            input.oninput = (e) => saveAnswer(e.target.value);
+            qOptions.appendChild(input);
+        } else if (q.inputType === 'textarea') {
+            const textarea = document.createElement('textarea');
+            textarea.className = 'textarea-input';
+            textarea.placeholder = 'Nhập bài làm tự luận của bạn...';
+            textarea.value = q.answer || '';
+            textarea.oninput = (e) => saveAnswer(e.target.value);
+            qOptions.appendChild(textarea);
+        }
+    }
+
+    // Chuyển câu hỏi
+    function nextQuestion() {
+        if (currentIndex < questions.length - 1) {
+            currentIndex++;
+            renderQuestion(currentIndex);
+            renderGrid();
+        }
+    }
+
+    function prevQuestion() {
+        if (currentIndex > 0) {
+            currentIndex--;
+            renderQuestion(currentIndex);
+            renderGrid();
+        }
+    }
+
+    // Đồng hồ đếm ngược đơn giản
+    function startTimer(duration) {
+        let timer = duration, minutes, seconds;
+        const display = document.getElementById('countdownTimer');
+        setInterval(function () {
+            minutes = parseInt(timer / 60, 10);
+            seconds = parseInt(timer % 60, 10);
+            minutes = minutes < 10 ? "0" + minutes : minutes;
+            seconds = seconds < 10 ? "0" + seconds : seconds;
+            display.textContent = minutes + "m : " + seconds + "s";
+            if (--timer < 0) timer = 0;
+        }, 1000);
+    }
+
+    // Chạy app
+    initApp();
+</script>
+
+</body>
+</html>
