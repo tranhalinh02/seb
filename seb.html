@@ -71,9 +71,11 @@
         .q-type { font-size: 14px; font-weight: bold; color: #2a2a72; }
         .star-btn { padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; color: #f59e0b; }
 
-        /* Thêm white-space: pre-wrap để giữ nguyên định dạng xuống dòng của code */
         .q-text { font-size: 16px; color: #222; margin-bottom: 25px; line-height: 1.5; font-weight: 500; white-space: pre-wrap; }
         
+        /* CSS cho hình ảnh đề bài */
+        .q-image { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px; }
+
         /* Input Styles */
         .options-list { display: flex; flex-direction: column; gap: 15px; }
         .option-item { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #333; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;}
@@ -342,7 +344,8 @@
             id: 27, 
             type: 'ESSAY', 
             inputType: 'textarea',
-            text: 'Write the function to calculate the area of a square, given its side.\nThen write the function call in main program.\n\n#include<iostream>\nusing namespace std;\n\n/*\nYour code is here (part 1)\n*/\n\nint main(){\n    // write to call the function here\n\n    return 0;\n}', 
+            text: '', // Phần text để trống
+            image: 'codeviet.png', // Sử dụng file ảnh
             answer: ''
         }
     ];
@@ -428,7 +431,19 @@
     function renderQuestion(index) {
         const q = questions[index];
         qTypeLabel.innerText = `CÂU HỎI ${q.id} (${q.type})`;
+        
+        // Render Text
         qText.innerText = q.text;
+        
+        // Render Image nếu có
+        if (q.image) {
+            const img = document.createElement('img');
+            img.src = q.image;
+            img.className = 'q-image';
+            img.alt = `Hình ảnh câu hỏi ${q.id}`;
+            qText.appendChild(img);
+        }
+
         qOptions.innerHTML = '';
 
         if (q.inputType === 'radio' || q.inputType === 'checkbox') {
