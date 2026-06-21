@@ -71,7 +71,8 @@
         .q-type { font-size: 14px; font-weight: bold; color: #2a2a72; }
         .star-btn { padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; color: #f59e0b; }
 
-        .q-text { font-size: 16px; color: #222; margin-bottom: 25px; line-height: 1.5; font-weight: 500; }
+        /* Thêm white-space: pre-wrap để giữ nguyên định dạng xuống dòng của code */
+        .q-text { font-size: 16px; color: #222; margin-bottom: 25px; line-height: 1.5; font-weight: 500; white-space: pre-wrap; }
         
         /* Input Styles */
         .options-list { display: flex; flex-direction: column; gap: 15px; }
@@ -81,6 +82,23 @@
         
         .text-input { width: 100%; max-width: 400px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
         .textarea-input { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; resize: vertical; }
+
+        /* CSS Mới cho khung gõ Code */
+        .code-textarea { 
+            width: 100%; 
+            height: 250px; 
+            padding: 15px; 
+            background-color: #1e1e1e; 
+            color: #d4d4d4; 
+            border: 1px solid #333; 
+            border-radius: 4px; 
+            font-family: 'Courier New', Courier, monospace; 
+            font-size: 14px; 
+            resize: vertical; 
+            white-space: pre;
+            overflow-wrap: normal;
+            overflow-x: auto;
+        }
 
         /* Fake Bottom Taskbar */
         .taskbar { background-color: #222; height: 40px; display: flex; justify-content: flex-end; align-items: center; padding: 0 20px; gap: 15px; color: #fff; font-size: 12px; }
@@ -92,7 +110,6 @@
 <body>
 
 <div class="seb-window">
-    <!-- Top fake toolbar -->
     <div class="browser-toolbar">
         <div class="toolbar-icons">
             <span>|◁</span>
@@ -105,12 +122,10 @@
         <div style="margin-left: 20px; color: #555;">X &nbsp; +</div>
     </div>
 
-    <!-- App Header -->
     <div class="app-header">
         <div class="logo-area">
             🌸 FPT Education<br><span style="font-size: 10px; color: #555;">TỔ CHỨC GIÁO DỤC FPT</span>
         </div>
-        <!-- Đã xóa địa chỉ Email ở phần user-info này theo yêu cầu -->
         <div class="user-info">
             <span id="currentDateDisplay"></span>
             <span>⚙️ 🏠</span>
@@ -119,7 +134,6 @@
         </div>
     </div>
 
-    <!-- Sub Header -->
     <div class="sub-header">
         <div class="exam-title"> </div>
         <div class="font-controls">
@@ -130,9 +144,7 @@
         </div>
     </div>
 
-    <!-- Main Content -->
     <div class="main-container">
-        <!-- Sidebar -->
         <div class="sidebar">
             <div class="card">
                 <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
@@ -140,8 +152,7 @@
                 <div class="timer-value" id="countdownTimer">45m : 0s</div>
 
                 <div class="question-grid" id="questionGrid">
-                    <!-- Buttons generated via JS -->
-                </div>
+                    </div>
 
                 <div class="nav-buttons">
                     <button class="btn btn-prev" onclick="prevQuestion()">← Trước</button>
@@ -160,7 +171,6 @@
             </div>
         </div>
 
-        <!-- Question Content -->
         <div class="content-area">
             <div class="question-card">
                 <div class="q-header">
@@ -173,13 +183,11 @@
                 </div>
 
                 <div class="options-list" id="qOptions">
-                    <!-- Options generated via JS -->
-                </div>
+                    </div>
             </div>
         </div>
     </div>
 
-    <!-- Bottom Taskbar -->
     <div class="taskbar">
         <div class="taskbar-icon">🔋</div>
         <div class="taskbar-icon">📶</div>
@@ -190,7 +198,7 @@
 </div>
 
 <script>
-    // Dữ liệu 25 câu hỏi (5 câu cũ + 20 câu trắc nghiệm tiếng Anh mới)
+    // Dữ liệu 27 câu hỏi
     const questions = [
         {
             id: 1, type: 'SINGLECHOICE', inputType: 'radio',
@@ -223,7 +231,6 @@
             text: 'Write a short paragraph (3-5 sentences) explaining the law of supply and demand.',
             answer: ''
         },
-        // --- 20 CÂU MỚI BẮT ĐẦU TỪ ĐÂY ---
         {
             id: 6, type: 'SINGLECHOICE', inputType: 'radio',
             text: 'What does GDP stand for in economics?',
@@ -323,6 +330,20 @@
             id: 25, type: 'SINGLECHOICE', inputType: 'radio',
             text: 'Scarcity in economics means that:',
             options: ['Resources are infinite', 'Human wants exceed available resources', 'Money is losing its value', 'Firms are going bankrupt'], answer: null
+        },
+        {
+            id: 26, 
+            type: 'CODE WRITING', 
+            inputType: 'textarea',
+            text: 'PRO192 - Practical Exam:\n\nWrite the body of the method "public String reverseString(String s)" that takes a string and returns it in reverse order.\n\nExample:\n- Input: "Da Nang"\n- Output: "gnaN aD"\n\npublic String reverseString(String s) {\n    // Write your code here\n\n}', 
+            answer: ''
+        },
+        {
+            id: 27, 
+            type: 'ESSAY', 
+            inputType: 'textarea',
+            text: 'Write the function to calculate the area of a square, given its side.\nThen write the function call in main program.\n\n#include<iostream>\nusing namespace std;\n\n/*\nYour code is here (part 1)\n*/\n\nint main(){\n    // write to call the function here\n\n    return 0;\n}', 
+            answer: ''
         }
     ];
 
@@ -438,9 +459,12 @@
             input.oninput = (e) => saveAnswer(e.target.value);
             qOptions.appendChild(input);
         } else if (q.inputType === 'textarea') {
+            // Nhận diện câu 26 và 27 là dạng code để áp dụng CSS đặc biệt
+            const isCodeQuestion = q.id === 26 || q.id === 27;
+            
             const textarea = document.createElement('textarea');
-            textarea.className = 'textarea-input';
-            textarea.placeholder = 'Type your essay here...';
+            textarea.className = isCodeQuestion ? 'code-textarea' : 'textarea-input';
+            textarea.placeholder = isCodeQuestion ? '// Type your code here...' : 'Type your essay here...';
             textarea.value = q.answer || '';
             textarea.oninput = (e) => saveAnswer(e.target.value);
             qOptions.appendChild(textarea);
