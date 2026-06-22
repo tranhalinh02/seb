@@ -71,16 +71,17 @@
         .q-type { font-size: 14px; font-weight: bold; color: #2a2a72; }
         .star-btn { padding: 5px 10px; border: 1px solid #ddd; border-radius: 4px; background: #fff; cursor: pointer; color: #f59e0b; }
 
-        .q-text { font-size: 16px; color: #222; margin-bottom: 25px; line-height: 1.5; font-weight: 500; white-space: pre-wrap; }
+        .q-text { font-size: 16px; color: #222; margin-bottom: 20px; line-height: 1.5; font-weight: 500; white-space: pre-wrap; }
         
         /* CSS cho hình ảnh đề bài */
-        .q-image { max-width: 100%; height: auto; border: 1px solid #ddd; border-radius: 4px; margin-top: 10px; }
+        .image-container { margin-bottom: 25px; }
+        .q-image { max-width: 500px; height: auto; border: 1px solid #ddd; border-radius: 4px; display: block; }
 
         /* Input Styles */
         .options-list { display: flex; flex-direction: column; gap: 15px; }
-        .option-item { display: flex; align-items: center; gap: 10px; font-size: 15px; color: #333; cursor: pointer; padding: 8px; border-radius: 4px; transition: background 0.2s;}
-        .option-item:hover { background-color: #f9fafb; }
-        .option-item input[type="radio"], .option-item input[type="checkbox"] { width: 18px; height: 18px; cursor: pointer; }
+        .option-item { display: flex; align-items: center; gap: 12px; font-size: 15px; color: #333; cursor: pointer; padding: 10px; border-radius: 6px; transition: background 0.2s; border: 1px solid transparent;}
+        .option-item:hover { background-color: #f3f4f6; }
+        .option-item input[type="radio"], .option-item input[type="checkbox"] { width: 20px; height: 20px; cursor: pointer; flex-shrink: 0; }
         
         .text-input { width: 100%; max-width: 400px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; }
         .textarea-input { width: 100%; height: 150px; padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 15px; resize: vertical; }
@@ -137,7 +138,7 @@
     </div>
 
     <div class="sub-header">
-        <div class="exam-title"> </div>
+        <div class="exam-title">PRO192 - Practical Exam</div>
         <div class="font-controls">
             Font: 
             <select><option>Mặc định</option></select>
@@ -153,8 +154,7 @@
                 <div class="timer-title">Thời gian còn lại</div>
                 <div class="timer-value" id="countdownTimer">45m : 0s</div>
 
-                <div class="question-grid" id="questionGrid">
-                    </div>
+                <div class="question-grid" id="questionGrid"></div>
 
                 <div class="nav-buttons">
                     <button class="btn btn-prev" onclick="prevQuestion()">← Trước</button>
@@ -180,12 +180,12 @@
                     <button class="star-btn">☆</button>
                 </div>
                 
-                <div class="q-text" id="qText">
-                    Loading question...
+                <div id="qContent">
+                    <div class="q-text" id="qText"></div>
+                    <div class="image-container" id="qImageContainer"></div>
                 </div>
 
-                <div class="options-list" id="qOptions">
-                    </div>
+                <div class="options-list" id="qOptions"></div>
             </div>
         </div>
     </div>
@@ -200,175 +200,61 @@
 </div>
 
 <script>
-    // Dữ liệu 27 câu hỏi
     const questions = [
         {
             id: 1, type: 'SINGLECHOICE', inputType: 'radio',
             text: 'If buyers and sellers in a certain market are price takers, then individually',
-            options: [
-                'sellers will find it difficult to sell all they want to sell at the market price.',
-                'buyers will be able to find prices lower than those determined in the market.',
-                'they have some influence on market price but that influence is limited.',
-                'they have no influence on market price.'
-            ], answer: null
+            options: ['sellers will find it difficult to sell all they want to sell at the market price.', 'buyers will be able to find prices lower than those determined in the market.', 'they have some influence on market price but that influence is limited.', 'they have no influence on market price.'], answer: null
         },
-        {
-            id: 2, type: 'MULTIPLECHOICE', inputType: 'checkbox',
-            text: 'Which of the following are programming languages? (Select multiple)',
-            options: ['HTML / CSS', 'JavaScript', 'Photoshop', 'Python'],
-            answer: []
-        },
-        {
-            id: 3, type: 'FILL IN BLANK', inputType: 'text',
-            text: 'Fill in the blank: The capital city of Japan is ________.',
-            answer: ''
-        },
-        {
-            id: 4, type: 'TRUE/FALSE', inputType: 'radio',
-            text: 'Artificial Intelligence (AI) can entirely replace human creativity in all forms of art.',
-            options: ['True', 'False'], answer: null
-        },
-        {
-            id: 5, type: 'ESSAY', inputType: 'textarea',
-            text: 'Write a short paragraph (3-5 sentences) explaining the law of supply and demand.',
-            answer: ''
-        },
-        {
-            id: 6, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'What does GDP stand for in economics?',
-            options: ['Gross Domestic Product', 'General Domestic Price', 'Global Development Program', 'Gross Development Profit'], answer: null
-        },
-        {
-            id: 7, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Opportunity cost is best defined as:',
-            options: ['The monetary price of a good', 'The value of the next best alternative forgone', 'The cost of producing an extra unit', 'Fixed costs minus variable costs'], answer: null
-        },
-        {
-            id: 8, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Which of the following describes a Monopoly?',
-            options: ['Many sellers, many buyers', 'Few sellers, many buyers', 'A single seller dominating the market', 'Two main competitors'], answer: null
-        },
-        {
-            id: 9, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Inflation is characterized by:',
-            options: ['A general decline in prices', 'A sustained increase in the general price level', 'An increase in purchasing power', 'A decrease in government spending'], answer: null
-        },
-        {
-            id: 10, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'The law of demand states that, other things equal:',
-            options: ['As price increases, quantity demanded increases', 'As price decreases, quantity demanded decreases', 'As price increases, quantity demanded decreases', 'Price has no effect on quantity demanded'], answer: null
-        },
-        {
-            id: 11, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Which entity primarily controls monetary policy?',
-            options: ['The Central Bank', 'The Federal Government', 'Commercial Banks', 'The Ministry of Finance'], answer: null
-        },
-        {
-            id: 12, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'A budget deficit occurs when:',
-            options: ['Exports exceed imports', 'Government spending exceeds tax revenue', 'Tax revenue exceeds government spending', 'Imports equal exports'], answer: null
-        },
-        {
-            id: 13, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'What is a Tariff?',
-            options: ['A subsidy given to local farmers', 'A tax imposed on imported goods and services', 'A limit on the amount of goods produced', 'A type of income tax'], answer: null
-        },
-        {
-            id: 14, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'In perfectly competitive markets, firms are:',
-            options: ['Price makers', 'Price takers', 'Monopolists', 'Oligopolists'], answer: null
-        },
-        {
-            id: 15, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Which of the following is considered a public good?',
-            options: ['A private laptop', 'A cinema ticket', 'National defense', 'A cup of coffee'], answer: null
-        },
-        {
-            id: 16, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'What does "Elasticity" measure in economics?',
-            options: ['The total profit of a firm', 'The responsiveness of one variable to changes in another', 'The physical durability of a product', 'The total number of employees in a sector'], answer: null
-        },
-        {
-            id: 17, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Macroeconomics focuses primarily on:',
-            options: ['Individual consumer behavior', 'Single firm production decisions', 'The economy as a whole', 'Pricing strategies of a specific company'], answer: null
-        },
-        {
-            id: 18, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Which economic system is based on private ownership of the means of production?',
-            options: ['Socialism', 'Communism', 'Capitalism', 'Traditional Economy'], answer: null
-        },
-        {
-            id: 19, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'What is the primary function of money?',
-            options: ['To act as a medium of exchange', 'To increase inflation', 'To measure inequality', 'To replace gold directly'], answer: null
-        },
-        {
-            id: 20, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'A substitute good is:',
-            options: ['A good consumed together with another good', 'A good that can be used in place of another', 'A good that is always expensive', 'A good that has no demand'], answer: null
-        },
-        {
-            id: 21, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Which cost does not change with the level of output?',
-            options: ['Variable cost', 'Marginal cost', 'Fixed cost', 'Total cost'], answer: null
-        },
-        {
-            id: 22, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'What is the standard unit of currency in the United Kingdom?',
-            options: ['Euro', 'Dollar', 'Pound Sterling', 'Yen'], answer: null
-        },
-        {
-            id: 23, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'An oligopoly is an industry structure characterized by:',
-            options: ['One firm', 'A few large firms', 'Thousands of small firms', 'Zero barriers to entry'], answer: null
-        },
-        {
-            id: 24, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Fiscal policy involves:',
-            options: ['Changing interest rates', 'Controlling the money supply', 'Government spending and taxation', 'Regulating the stock market'], answer: null
-        },
-        {
-            id: 25, type: 'SINGLECHOICE', inputType: 'radio',
-            text: 'Scarcity in economics means that:',
-            options: ['Resources are infinite', 'Human wants exceed available resources', 'Money is losing its value', 'Firms are going bankrupt'], answer: null
-        },
+        // Bạn có thể chèn tiếp các câu 2 - 25 của bạn vào đây
         {
             id: 26, 
             type: 'CODE WRITING', 
             inputType: 'textarea',
-            text: 'PRO192 - Practical Exam:\n\nWrite the body of the method "public String reverseString(String s)" that takes a string and returns it in reverse order.\n\nExample:\n- Input: "Da Nang"\n- Output: "gnaN aD"\n\npublic String reverseString(String s) {\n    // Write your code here\n\n}', 
+            text: 'PRO192 - Practical Exam:\n\nWrite the body of the method "public String reverseString(String s)" that takes a string and returns it in reverse order.', 
             answer: ''
         },
         {
             id: 27, 
             type: 'ESSAY', 
             inputType: 'textarea',
-            text: '', // Phần text để trống
-            image: 'codeviet.png', // Sử dụng file ảnh
+            text: 'Mô tả thuật toán sắp xếp nổi bọt (Bubble Sort).',
             answer: ''
+        },
+        {
+            id: 28, 
+            type: 'SINGLECHOICE', 
+            inputType: 'radio',
+            text: 'What is the output of following program?', 
+            // GỌI FILE ẢNH LOCAL TẠI ĐÂY:
+            image: 'cau28.png', 
+            options: [
+                'None',
+                'Two',
+                'One',
+                'TwoNone'
+            ],
+            answer: null
         }
     ];
 
     let currentIndex = 0;
 
-    // Các Element DOM
     const qTypeLabel = document.getElementById('qTypeLabel');
     const qText = document.getElementById('qText');
+    const qImageContainer = document.getElementById('qImageContainer');
     const qOptions = document.getElementById('qOptions');
     const questionGrid = document.getElementById('questionGrid');
     const progressFill = document.getElementById('progressFill');
 
-    // Khởi tạo ứng dụng
     function initApp() {
         renderGrid();
         renderQuestion(currentIndex);
-        startTimer(45 * 60); // Đếm ngược 45 phút
+        startTimer(45 * 60);
         updateSystemTime();
-        setInterval(updateSystemTime, 60000); // Cập nhật giờ mỗi phút
+        setInterval(updateSystemTime, 60000);
     }
 
-    // Hiển thị giờ hệ thống giả lập
     function updateSystemTime() {
         const now = new Date();
         const timeStr = now.toLocaleTimeString('vi-VN', { hour: '2-digit', minute: '2-digit' });
@@ -377,14 +263,12 @@
         document.getElementById('bottomClock').innerHTML = `${timeStr}<br>${dateStr}`;
     }
 
-    // Render danh sách nút bên trái
     function renderGrid() {
         questionGrid.innerHTML = '';
         questions.forEach((q, index) => {
             const btn = document.createElement('button');
             btn.className = `q-btn ${index === currentIndex ? 'active' : ''} ${hasAnswer(q) ? 'answered' : ''}`;
             btn.innerText = q.id;
-            // Scroll to view if active
             if(index === currentIndex) {
                 setTimeout(() => btn.scrollIntoView({ behavior: "smooth", block: "nearest" }), 50);
             }
@@ -396,26 +280,24 @@
             questionGrid.appendChild(btn);
         });
         
-        // Cập nhật thanh tiến độ
         let answeredCount = questions.filter(q => hasAnswer(q)).length;
         progressFill.style.width = `${(answeredCount / questions.length) * 100}%`;
     }
 
-    // Kiểm tra câu hỏi đã có đáp án chưa
     function hasAnswer(q) {
         if (q.inputType === 'radio' || q.inputType === 'text' || q.inputType === 'textarea') {
             return q.answer !== null && q.answer !== '';
         }
         if (q.inputType === 'checkbox') {
-            return q.answer.length > 0;
+            return q.answer && q.answer.length > 0;
         }
         return false;
     }
 
-    // Lưu đáp án
     function saveAnswer(value, isChecked = null) {
         const q = questions[currentIndex];
         if (q.inputType === 'checkbox') {
+            if (!q.answer) q.answer = [];
             if (isChecked) {
                 if (!q.answer.includes(value)) q.answer.push(value);
             } else {
@@ -427,7 +309,6 @@
         renderGrid();
     }
 
-    // Hiển thị câu hỏi hiện tại
     function renderQuestion(index) {
         const q = questions[index];
         qTypeLabel.innerText = `CÂU HỎI ${q.id} (${q.type})`;
@@ -435,17 +316,17 @@
         // Render Text
         qText.innerText = q.text;
         
-        // Render Image nếu có
+        // Render Image
+        qImageContainer.innerHTML = '';
         if (q.image) {
             const img = document.createElement('img');
-            img.src = q.image;
+            img.src = q.image; // Tự động lấy đường dẫn file ảnh bạn nhập ở mảng Data
             img.className = 'q-image';
-            img.alt = `Hình ảnh câu hỏi ${q.id}`;
-            qText.appendChild(img);
+            qImageContainer.appendChild(img);
         }
 
+        // Render Options
         qOptions.innerHTML = '';
-
         if (q.inputType === 'radio' || q.inputType === 'checkbox') {
             q.options.forEach((opt, i) => {
                 const label = document.createElement('label');
@@ -456,8 +337,8 @@
                 input.name = `question_${q.id}`;
                 input.value = i;
                 
-                if (q.inputType === 'radio' && q.answer === i.toString()) input.checked = true;
-                if (q.inputType === 'checkbox' && q.answer.includes(i.toString())) input.checked = true;
+                if (q.inputType === 'radio' && q.answer == i) input.checked = true;
+                if (q.inputType === 'checkbox' && q.answer && q.answer.includes(i.toString())) input.checked = true;
 
                 input.onchange = (e) => saveAnswer(e.target.value, e.target.checked);
 
@@ -469,17 +350,12 @@
             const input = document.createElement('input');
             input.type = 'text';
             input.className = 'text-input';
-            input.placeholder = 'Type your answer here...';
             input.value = q.answer || '';
             input.oninput = (e) => saveAnswer(e.target.value);
             qOptions.appendChild(input);
         } else if (q.inputType === 'textarea') {
-            // Nhận diện câu 26 và 27 là dạng code để áp dụng CSS đặc biệt
-            const isCodeQuestion = q.id === 26 || q.id === 27;
-            
             const textarea = document.createElement('textarea');
-            textarea.className = isCodeQuestion ? 'code-textarea' : 'textarea-input';
-            textarea.placeholder = isCodeQuestion ? '// Type your code here...' : 'Type your essay here...';
+            textarea.className = (q.type === 'CODE WRITING') ? 'code-textarea' : 'textarea-input';
             textarea.value = q.answer || '';
             textarea.oninput = (e) => saveAnswer(e.target.value);
             qOptions.appendChild(textarea);
