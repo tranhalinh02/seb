@@ -3,7 +3,6 @@
 # Hạn sử dụng: 2026-09-17
 QX9T10-KL7P887-MN2VU   | A3EF1AA        # hongmy
 Z8WAT2-RY3NR7-XT6QY9   | C83EC4B3       # tranhalinh
-B3M7X2-WP9K4A-QT8V1    | 8C41DFF4       # quoc
 K8V4P9-ZN3W7C-RT6Y1    | 14BDC486       # minhngoc
 X2W7M9-RL4K6A-PT5V8    | EABBBD8B       # khoi
 D9B3Q7-WL6N2C-XT8Z4    | A8F5DA0D       # vinhHoanh
@@ -14,7 +13,6 @@ R8K4V9-ZN2W6C-PT7Y3    | 9202B302       # My(ban_long)
 B5M9X1-TL4K7A-WT3Q8    | A0D77815       # ChauAnh(ban_long)
 N7Q3R9-WL5M2B-XZ6W1    | 106C0533       # Longsell
 K4V8P1-ZN6W3C-RT7Y2    | 366C7ED4       # MinhQuang
-
 D5B9Q1-WL4N7C-XT3Z8    | 76BD45D9       # NguyenDan
 P2K6V9-ZN3W5B-RT8Y1    | 960C8B3C       # Key 15
 M4T8X1-RL6K2A-WT7Q9    | 89893240       # Duyen(nyKhoa)
@@ -39,7 +37,7 @@ Z9W3P2-NL4M6B-XT5V1    | B2E75B14       # BaoHo
 R7K2V5-ZN3W6C-PT4Y1    | 2C632535       # BaoMinh
 B9M3X2-TL4K6A-WT5Q1    | BC629254       # Phan Minh Anh
 N8Q2R5-WL3M6B-XZ4W1    | 2295057E       # TamTam
-K3V7P1-ZN4W6C-RT5Y2    | EMPTY          # Key 39
+K3V7P1-ZN4W6C-RT5Y2    | 8C41DFF4       # Quoc(seller)
 X8W2M6-RL3K7A-PT4V1    | EMPTY          # Key 40
 D7B1Q5-WL2N6C-XT3Z9    | EMPTY          # Key 41
 P3K7V1-ZN4W5B-RT2Y9    | EMPTY          # Key 42
