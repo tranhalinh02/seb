@@ -205,36 +205,6 @@
             id: 1, type: 'SINGLECHOICE', inputType: 'radio',
             text: 'If buyers and sellers in a certain market are price takers, then individually',
             options: ['sellers will find it difficult to sell all they want to sell at the market price.', 'buyers will be able to find prices lower than those determined in the market.', 'they have some influence on market price but that influence is limited.', 'they have no influence on market price.'], answer: null
-        },
-        // Bạn có thể chèn tiếp các câu 2 - 25 của bạn vào đây
-        {
-            id: 26, 
-            type: 'CODE WRITING', 
-            inputType: 'textarea',
-            text: 'PRO192 - Practical Exam:\n\nWrite the body of the method "public String reverseString(String s)" that takes a string and returns it in reverse order.', 
-            answer: ''
-        },
-        {
-            id: 27, 
-            type: 'ESSAY', 
-            inputType: 'textarea',
-            text: 'Mô tả thuật toán sắp xếp nổi bọt (Bubble Sort).',
-            answer: ''
-        },
-        {
-            id: 28, 
-            type: 'SINGLECHOICE', 
-            inputType: 'radio',
-            text: 'What is the output of following program?', 
-            // GỌI FILE ẢNH LOCAL TẠI ĐÂY:
-            image: 'cau28.png', 
-            options: [
-                'None',
-                'Two',
-                'One',
-                'TwoNone'
-            ],
-            answer: null
         }
     ];
 
@@ -320,7 +290,7 @@
         qImageContainer.innerHTML = '';
         if (q.image) {
             const img = document.createElement('img');
-            img.src = q.image; // Tự động lấy đường dẫn file ảnh bạn nhập ở mảng Data
+            img.src = q.image; 
             img.className = 'q-image';
             qImageContainer.appendChild(img);
         }
