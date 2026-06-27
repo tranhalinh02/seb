@@ -46,7 +46,6 @@ B2M6X1-TL3K5A-WT8Q9    | 84056160       # Thùy Nhung
 N3Q7R9-WL4M2B-XZ1W8    | AC207796       # Lã Trần Minh Khoa
 K2V6P1-ZN3W5C-RT8Y9    | E284A99E       # Le Thanh
 X7W1M5-RL2K4A-PT3V9    | 98AE8636       # Ngô Thắng
-D3B7Q9-WL4N2C-XT1Z8    | 4BCFBE80       # Trịnh Minh Tuấn(Bram Ham)
 Q5R2T8-NM4W6C-XT9Y1    | EMPTY          # Key 51
 V8K3P1-ZL5M2B-RT7V9    | EMPTY          # Key 52
 D4B9Q2-WL6N7C-PT3Z8    | EMPTY          # Key 53
