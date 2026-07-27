@@ -67,7 +67,7 @@ Z4W7P1-NL9M3B-XT6V2    | C6D2AD66       # Anh Quan Nguyen (Summit)
 R5K2V8-ZN3W7C-PT1Y9    | 643BC26A       # Le Hoàn (Summit)
 B9M6X1-TL4K2A-WT8Q5    | 24DC51F        # Lệ Quyên Nguyễn
 N2Q8R3-WL7M5B-XZ4W1    | E41D3E95       # Mimi nguyễn
-K7V1P9-ZN6W4C-RT3Y2    | EMPTY          # Key 68
+K7V1P9-ZN6W4C-RT3Y2    | 3643D7B3       # Đặng Nhân
 X5W3M8-RL2K9A-PT7V1    | EMPTY          # Key 69
 D1B8Q4-WL3N6C-XT9Z5    | EMPTY          # Key 70
 P6K5V2-ZN7W1B-RT8Y3    | EMPTY          # Key 71
