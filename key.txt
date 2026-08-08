@@ -69,7 +69,7 @@ B9M6X1-TL4K2A-WT8Q5    | 24DC51F        # Lệ Quyên Nguyễn
 N2Q8R3-WL7M5B-XZ4W1    | E41D3E95       # Mimi nguyễn
 K7V1P9-ZN6W4C-RT3Y2    | 3643D7B3       # Đặng Nhân
 X5W3M8-RL2K9A-PT7V1    | 14C7EED9       # Nguyễn Thịnh
-D1B8Q4-WL3N6C-XT9Z5    | EMPTY          # Key 70
+D1B8Q4-WL3N6C-XT9Z5    | E83B838A       # Nguyễn Thắng
 P6K5V2-ZN7W1B-RT8Y3    | EMPTY          # Key 71
 M3T9X7-RL5K4A-WT2Q8    | EMPTY          # Key 72
 Z8W2P6-NL1M7B-XT4V9    | EMPTY          # Key 73
