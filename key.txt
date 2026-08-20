@@ -77,7 +77,7 @@ R4K7V1-ZN9W5C-PT6Y2    | E7F1E82        # Đỗ quang khiêm
 B2M5X9-TL8K3A-WT1Q7    | F187A8C0       # Uyên Phương
 N9Q4R6-WL2M8B-XZ5W 3    | A2733B59      # Vĩnh tấn(trường Bách Khoa Đà Nẵng, tạm thời chưa thi, nên cách ở số 3)
 K1V8P3-ZN5W9C-RT2Y7    | 86F68C1B       # Hoàng Thạch
-X7W6M2-RL4K1A-PT8V5    | EMPTY          # Key 78
+X7W6M2-RL4K1A-PT8V5    | DC803CA8       # Quân Nguyễn
 D8B3Q9-WL1N5C-XT7Z2    | EMPTY          # Key 79
 P5K2V7-ZN8W3B-RT4Y1    | EMPTY          # Key 80
 M1T7X4-RL9K2A-WT5Q6    | EMPTY          # Key 81
